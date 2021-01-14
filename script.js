@@ -19,28 +19,17 @@ keys.addEventListener('click', event => {
         }
     }
     
-    // refactor it
+ 
     if (type === 'operator') {
-        console.log(key);
-        if (displayValue == '+' || displayValue == '-' || displayValue == '&times;' || displayValue == '/') {
-            displayValue = keyValue;
-            } else {
-                display.textContent = displayValue + keyValue;
+        // console.log(key);
+        // if (displayValue == '+' || displayValue == '-' || displayValue == '&times;' || displayValue == '/') {
+        //     displayValue = keyValue;
+        //     } else {
+                // display.textContent = displayValue + keyValue;
+        display.textContent = displayValue + keyValue;
         }
-    }
-
-    // const displayValue = display.textContent;
-
-    // why doesn't this work as a refactor of the above?
-    // is this an operator key?
-    // if (type === 'operator') {
-    //     console.log(key);
-    //     display.textContent = keyValue;
-    //     } else {
-    //         display.textContent = displayValue + keyValue;
     // }
 
-    // change to displayValue
 
     if (type === 'equal')   {
         const expression = display.textContent;
@@ -59,11 +48,16 @@ keys.addEventListener('click', event => {
 
 
 
-// FINAL POINTS:
+// PLAN:
 
-// 0. Why doesn't above JS zombie code work?
+// 0. Refactor to perform continuous functions.
+// (a) 
 
-// 1. How can you refactor displays section of CSS?
+
+
+
+
+// 1. How can you refactor "displays" section of CSS?
 
 // 2. Get "&times;" working with the eval function somehow...
 
@@ -72,7 +66,7 @@ keys.addEventListener('click', event => {
 // 4. Include spaces before & after operators. 
 
 // 5. Ensure the correct screenshot displays.
-// DONE!
+
 
 
 
