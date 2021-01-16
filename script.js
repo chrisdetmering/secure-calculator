@@ -1,3 +1,22 @@
+// TEST CASE
+// 2 + 3 = 5
+
+// 1. Press 2
+// Expectation: Display shows 2
+// Actual:
+
+// 2. Press +
+// Expectation: Display still shows 2
+// Actual:
+
+// 3. Press 3
+// Expectation: Display shows 3
+// Actual:
+
+// 4. Press =
+// Expectation: Display shows 5
+// Actual:
+
 
 const calculator = document.querySelector('.calculator');
 const keys = document.querySelector('.calculator-keys');
@@ -9,8 +28,8 @@ let operator;
 let secondOperand;
 let result;
 
+// figure out where this function call should go; not here
 renderExpression();
-
 
 
 function renderExpression() {
@@ -67,7 +86,6 @@ function renderEquation()   {
 
 
 
-
 // function calculateExpression()  {
 //     equal.addEventListener('click', function() {
 //         switch (operator) {
@@ -86,39 +104,6 @@ function renderEquation()   {
 
 
 
-
-
-
-// likely will DELETE:
-//             if (operator === '+') { // this line is definitely correct, stop questioning it
-//                 let solution = parseInt(firstOperand) + parseInt(secondOperand);
-//                 console.log(solution);
-//                 display.textContent = solution;
-//             }
-    
-//                 else if (operator === '-') { // this line is definitely correct, stop questioning it
-//                     let solution = parseInt(firstOperand) - parseInt(secondOperand);
-//                     console.log(solution);
-//                     display.textContent = solution;
-//                 }
-    
-//                 else if (operator === '*') { // this line is definitely correct, stop questioning it
-//                     let solution = parseInt(firstOperand) * parseInt(secondOperand);
-//                     console.log(solution);
-//                     display.textContent = solution;
-//                 }
-    
-//                 // maybe just say 'else'
-//                 else if (operator === '/') { // this line is definitely correct, stop questioning it
-//                     let solution = parseInt(firstOperand) / parseInt(secondOperand);
-//                     console.log(solution);
-//                     display.textContent = solution;
-//                 }
-
-// }
-
-
-    
         
 // ensure on clicking clear, you reset the first and second operands
 
@@ -133,7 +118,6 @@ function resetDisplay()   {
     
 
 
-// renderEquation function for upper right window?
 
 function errorAlert(operator) {
     alert('Enter a number before entering an operator');
@@ -147,23 +131,6 @@ function errorAlert(operator) {
 
 
 
-
-
-
-
-
-// TEST CASE 2 + 3 = 5
-// 1. press 2
-// expected show 2
-// actual: 2 displays
-// (verified with console.log)
-
-// 2. press =
-// expected show 5
-// actual: 5 displays
-// (verified with console.log)
-
-// TEST CASE 3 * 6 = 18
 
 
 
@@ -190,8 +157,6 @@ function errorAlert(operator) {
 
 // 0. Refactor to perform continuous functions.
 // (a) 
-
-
 
 
 
