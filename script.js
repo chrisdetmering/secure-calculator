@@ -1,26 +1,33 @@
 // TEST CASE
-// 2 + 3 = 5
+// 2 + 3 + 7 = 12
 
 // 1. Press 2
 // Expectation: Display shows 2
-// Actual:
+// Actual: works
 
 // 2. Press +
 // Expectation: Display still shows 2
-// Actual:
+// Actual: works
 
 // 3. Press 3
 // Expectation: Display shows 3
-// Actual:
+// Actual: works
+
+// 4. Press +
+// Expectation: Display still shows 3
+// Actual: works
+
+// 4. Press 7
+// Expectation: Display shows 7
+// Actual: works
 
 // 4. Press =
-// Expectation: Display shows 5
-// Actual:
+// Expectation: Display shows 12
+// Actual: displays 9 (adds firstOperand to 3rd)
 
 
 const calculator = document.querySelector('.calculator');
 const keys = document.querySelector('.calculator-keys');
-const equal = document.querySelector('.equal');
 const display = document.querySelector('.calculator-display');
 const expressionDisplay = document.querySelector('.expression-display');
 let firstOperand;
@@ -28,79 +35,56 @@ let operator;
 let secondOperand;
 let result;
 
-// figure out where this function call should go; not here
-renderExpression();
 
 
-function renderExpression() {
-    keys.addEventListener('click', event => {
-        const key = event.target;
-        const keyValue = key.textContent;
-        const { type } = key.dataset;
-    
-        if (type === 'number')   {
-            if (operator) {
-                firstOperand = keyValue; 
-                display.textContent = firstOperand; 
-            } else {
-                secondOperand = keyValue; 
-                display.textContent = secondOperand;
-              }
-        }
-    
-        if (type === 'operator') {
-            operator = keyValue; 
-        }
-    })   
-    calculateExpression(); 
-}
+keys.addEventListener('click', event => {
+    const key = event.target;
+    const keyValue = key.textContent;
+    const { type } = key.dataset;
 
+// why did you put 2 if statements? just use 'else if'.
+// also fix the logic in this so operator separates 1st & 2nd operands 
+// (see Ahmed's code for ideas).
 
-function calculateExpression()  {
-    keys.addEventListener('click', event => {
-        const key = event.target;
-        const { type } = key.dataset;
-
-        if (type === 'equal')   {
-            switch (operator) {
-                case '+':
-                    return Number(firstOperand) + Number(secondOperand);
-                case '-':
-                    return Number(firstOperand) - Number(secondOperand);
-                case '*':
-                    return Number(firstOperand) * Number(secondOperand);
-                case '/':
-                    return Number(firstOperand) / Number(secondOperand);
+    if (type === 'number')   {
+        if (operator) {
+            firstOperand = keyValue; 
+            display.textContent = firstOperand; 
+        } else {
+            secondOperand = keyValue; 
+            display.textContent = secondOperand;
             }
+    }
+
+    if (type === 'operator') {
+        operator = keyValue; 
+    }
+});   
+    
+
+const equal = document.querySelector('.equal');
+equal.addEventListener('click', event => {
+    const key = event.target;
+    const { type } = key.dataset;
+
+    if (type === 'equal')   {
+        switch (operator) {
+            case '+':
+                const sum = Number(firstOperand) + Number(secondOperand);
+                display.textContent = sum;
+            case '-':
+                const difference = Number(firstOperand) - Number(secondOperand);
+                display.textContent = difference;
+            case '*':
+                const product = Number(firstOperand) * Number(secondOperand);
+                display.textContent = product;    
+            case '/':
+                const quotient = Number(firstOperand) / Number(secondOperand);
+                display.textContent = quotient;
         }
-    })
-    renderEquation();
-}
-
-
-function renderEquation()   {
-    let result = calculateExpression();
-    display.textContent = result;
-}
-
-
-
-
-// function calculateExpression()  {
-//     equal.addEventListener('click', function() {
-//         switch (operator) {
-//             case '+':
-//                 return Number(firstOperand) + Number(secondOperand);
-//             case '-':
-//                 return Number(firstOperand) - Number(secondOperand);
-//             case '*':
-//                 return Number(firstOperand) * Number(secondOperand);
-//             case '/':
-//                 return Number(firstOperand) / Number(secondOperand);
-//         }
-//     })
-// }
-
+    }
+});
+    
 
 
 
