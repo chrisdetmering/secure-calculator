@@ -43,8 +43,7 @@ keys.addEventListener('click', event => {
     const { type } = key.dataset;
 
 // why did you put 2 if statements? just use 'else if'.
-// also fix the logic in this so operator separates 1st & 2nd operands 
-// (see Ahmed's code for ideas).
+// also fix the logic in this so operator separates 1st & 2nd operands.
 
     if (type === 'number')   {
         if (operator) {
@@ -87,7 +86,7 @@ equal.addEventListener('click', event => {
     
 
 
-
+  
         
 // ensure on clicking clear, you reset the first and second operands
 
