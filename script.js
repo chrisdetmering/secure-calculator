@@ -53,6 +53,27 @@ keys.addEventListener('click', event => {
 
     if (type === 'operator') {
         operator = keyValue; 
+        if (firstOperand && secondOperand)  {
+            switch (operator)   {
+                case '+':
+                    result = Number(firstOperand) + Number(secondOperand);
+                    display.textContent = result;
+                    break;
+                case '-':
+                    result = Number(firstOperand) - Number(secondOperand);
+                    display.textContent = result;
+                    break;
+                case '*':
+                    result = Number(firstOperand) * Number(secondOperand);
+                    display.textContent = result;    
+                    break;
+                case '/':
+                    result = Number(firstOperand) / Number(secondOperand);
+                    display.textContent = result;
+                    break;
+            }
+            firstOperand = result;
+        }
     }
 });   
     
@@ -82,6 +103,7 @@ equal.addEventListener('click', event => {
                 break;
         }
     }
+    firstOperand = result;
 });
     
         
