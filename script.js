@@ -30,11 +30,10 @@ const calculator = document.querySelector('.calculator');
 const keys = document.querySelector('.calculator-keys');
 const display = document.querySelector('.calculator-display');
 const expressionDisplay = document.querySelector('.expression-display');
-let firstOperand;
-let operator;
-let secondOperand;
-let result;
-
+let firstOperand = null;
+let operator = null;
+let secondOperand = null;
+let result = null;
 
 
 keys.addEventListener('click', event => {
@@ -42,12 +41,9 @@ keys.addEventListener('click', event => {
     const keyValue = key.textContent;
     const { type } = key.dataset;
 
-// why did you put 2 if statements? just use 'else if'.
-// also fix the logic in this so operator separates 1st & 2nd operands.
-
     if (type === 'number')   {
-        if (operator) {
-            firstOperand = keyValue; 
+        if (operator === null) {
+            firstOperand === null ? (firstOperand = keyValue) : (firstOperand += firstOperand); 
             display.textContent = firstOperand; 
         } else {
             secondOperand = keyValue; 
@@ -69,28 +65,28 @@ equal.addEventListener('click', event => {
     if (type === 'equal')   {
         switch (operator) {
             case '+':
-                const sum = Number(firstOperand) + Number(secondOperand);
-                display.textContent = sum;
+                result = Number(firstOperand) + Number(secondOperand);
+                display.textContent = result;
+                break;
             case '-':
-                const difference = Number(firstOperand) - Number(secondOperand);
-                display.textContent = difference;
+                result = Number(firstOperand) - Number(secondOperand);
+                display.textContent = result;
+                break;
             case '*':
-                const product = Number(firstOperand) * Number(secondOperand);
-                display.textContent = product;    
+                result = Number(firstOperand) * Number(secondOperand);
+                display.textContent = result;    
+                break;
             case '/':
-                const quotient = Number(firstOperand) / Number(secondOperand);
-                display.textContent = quotient;
+                result = Number(firstOperand) / Number(secondOperand);
+                display.textContent = result;
+                break;
         }
     }
 });
     
-
-
-  
         
 // ensure on clicking clear, you reset the first and second operands
 
-    
 
 function resetDisplay()   {
     if (type === 'clear')   {
@@ -105,22 +101,6 @@ function resetDisplay()   {
 function errorAlert(operator) {
     alert('Enter a number before entering an operator');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
