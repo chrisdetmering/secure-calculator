@@ -1,8 +1,12 @@
 // TEST CASE
-// Get CLEAR button working
+// Get alert to appear if ever operator is clicked before anything else.
 
-// 0. Press "C"
-// Expectation: Display clears
+// 0. Press "+"
+// Expectation: Alert appears
+// Actual: works
+
+// 1. Without refreshing, press "-"
+// Expectation: Alert appears again
 // Actual: nothing happens
 
 
@@ -52,12 +56,13 @@ keys.addEventListener('click', event => {
                     display.textContent = result;
                     break;
             }
-        } else if (!operator && !firstOperand && !secondOperand)  {
-            alert('Enter a number before entering an operator');
-
-          }
+        // } else if (!operator && !firstOperand && !secondOperand)  {
+        //     alert('Enter a number before entering an operator');
+        //     operator = null;
+        //   }
         firstOperand = result;
         secondOperand = null;
+        }
         operator = keyValue;
     }
 });   
@@ -91,10 +96,6 @@ equal.addEventListener('click', event => {
     firstOperand = result;
 });
     
-        
-// ensure on clicking clear, you reset the first and second operands
-
-
 
 const clear = document.querySelector('.clear');
 clear.addEventListener('click', event => {
@@ -142,9 +143,3 @@ clear.addEventListener('click', event => {
 // 4. Include spaces before & after operators. 
 
 // 5. Ensure the correct screenshot displays.
-
-// 6. verif use of const vs let.
-
-
-
-
