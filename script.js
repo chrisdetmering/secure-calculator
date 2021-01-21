@@ -5,7 +5,7 @@
 // Expectation: Alert appears
 // Actual: works
 
-// 1. Without refreshing, press "-"
+// 1. Without refreshing or doing anything else, press "-"
 // Expectation: Alert appears again
 // Actual: nothing happens
 
@@ -35,38 +35,74 @@ keys.addEventListener('click', event => {
           display.textContent = secondOperand;
     }
 }
+// works:
+//     if (type === 'operator') { 
+//         if (firstOperand && secondOperand)  {
+//             switch (operator)   {
+//                 case '+':
+//                     result = Number(firstOperand) + Number(secondOperand);
+//                     display.textContent = result;
+//                     break;
+//                 case '-':
+//                     result = Number(firstOperand) - Number(secondOperand);
+//                     display.textContent = result;
+//                     break;
+//                 case '*':
+//                     result = Number(firstOperand) * Number(secondOperand);
+//                     display.textContent = result;    
+//                     break;
+//                 case '/':
+//                     result = Number(firstOperand) / Number(secondOperand);
+//                     display.textContent = result;
+//                     break;
+//             }
+//         firstOperand = result;
+//         secondOperand = null;
+//         }
+//         operator = keyValue;
+//     }
+// });   
 
-    if (type === 'operator') { 
-        if (firstOperand && secondOperand)  {
-            switch (operator)   {
-                case '+':
-                    result = Number(firstOperand) + Number(secondOperand);
-                    display.textContent = result;
-                    break;
-                case '-':
-                    result = Number(firstOperand) - Number(secondOperand);
-                    display.textContent = result;
-                    break;
-                case '*':
-                    result = Number(firstOperand) * Number(secondOperand);
-                    display.textContent = result;    
-                    break;
-                case '/':
-                    result = Number(firstOperand) / Number(secondOperand);
-                    display.textContent = result;
-                    break;
-            }
-        // } else if (!operator && !firstOperand && !secondOperand)  {
+
+if (type === 'operator') { 
+    if (firstOperand && secondOperand)  {
+        switch (operator)   {
+            case '+':
+                result = Number(firstOperand) + Number(secondOperand);
+                display.textContent = result;
+                break;
+            case '-':
+                result = Number(firstOperand) - Number(secondOperand);
+                display.textContent = result;
+                break;
+            case '*':
+                result = Number(firstOperand) * Number(secondOperand);
+                display.textContent = result;    
+                break;
+            case '/':
+                result = Number(firstOperand) / Number(secondOperand);
+                display.textContent = result;
+                break;
+        }
+    firstOperand = result;
+    secondOperand = null;
+    } else if (!operator && !firstOperand && !secondOperand)    {
+        alert('Enter a number before entering an operator.');
+        operator = null;
+    }
+    operator = keyValue;
+}
+});   
+    
+
+// } else if (!operator && !firstOperand && !secondOperand)  {
         //     alert('Enter a number before entering an operator');
         //     operator = null;
         //   }
-        firstOperand = result;
-        secondOperand = null;
-        }
-        operator = keyValue;
-    }
-});   
-    
+
+
+
+
 
 const equal = document.querySelector('.equal');
 equal.addEventListener('click', event => {
