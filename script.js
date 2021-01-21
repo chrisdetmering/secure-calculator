@@ -1,21 +1,31 @@
 // TEST CASE
-// 22 + 33 = 55
+// 11 + 22 + 33 = 66
 
-// 1. Press 22
+// 0. Press 11
+// Expectation: Display shows 11
+// Actual: works
+
+// 1. Press +
+// Expectation: Display still shows 11
+// Actual: works
+
+// 2. Press 22
 // Expectation: Display shows 22
 // Actual: works
 
-// 2. Press +
-// Expectation: Display still shows 2
-// Actual: works
-
-// 3. Press 33
+// 3. Press +
 // Expectation: Display shows 33
 // Actual: works
 
-// 4. Press =
-// Expectation: Display shows 55
-// Actual: works!
+// 4. Press 33
+// Expectation: Display shows 33
+// Actual: display shows 2233
+
+
+
+// 5. Press =
+// Expectation: Display shows 66
+// Actual: 
 
 
 const calculator = document.querySelector('.calculator');
@@ -33,7 +43,7 @@ keys.addEventListener('click', event => {
     const keyValue = key.textContent;
     const { type } = key.dataset;
 
-    if (type === "number") {
+    if (type === 'number') {
         if (operator === null) {
           !firstOperand ? (firstOperand = keyValue) : (firstOperand += keyValue);
           display.textContent = firstOperand;
