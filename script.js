@@ -52,9 +52,12 @@ keys.addEventListener('click', event => {
                     display.textContent = result;
                     break;
             }
-            firstOperand = result;
-            secondOperand = null;
-        }
+        } else if (!operator && !firstOperand && !secondOperand)  {
+            alert('Enter a number before entering an operator');
+
+          }
+        firstOperand = result;
+        secondOperand = null;
         operator = keyValue;
     }
 });   
@@ -92,19 +95,24 @@ equal.addEventListener('click', event => {
 // ensure on clicking clear, you reset the first and second operands
 
 
-function resetDisplay()   {
+
+const clear = document.querySelector('.clear');
+clear.addEventListener('click', event => {
+    const key = event.target;
+    const { type } = key.dataset;
+
     if (type === 'clear')   {
         display.textContent = '0';
-        expressionDisplay.textContent = '';
     }
-}
+    firstOperand = null;
+    secondOperand = null;
+    operator = null;
+    result = null;
+});
+
     
 
 
-
-function errorAlert(operator) {
-    alert('Enter a number before entering an operator');
-}
 
 
 
@@ -123,9 +131,7 @@ function errorAlert(operator) {
 // PLAN:
 
 // 0. Refactor to perform continuous functions.
-// (a) 
-
-
+// DONE!
 
 // 1. How can you refactor "displays" section of CSS?
 
