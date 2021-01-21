@@ -1,13 +1,35 @@
 // TEST CASE
-// Get alert to appear if ever operator is clicked before anything else.
+// 200 / 5 = 40 - 10 = 30.
 
-// 0. Press "+"
-// Expectation: Alert appears
+// 0. Press "200"
+// Expectation: Display shows 200
 // Actual: works
 
-// 1. Without refreshing or doing anything else, press "-"
-// Expectation: Alert appears again
-// Actual: nothing happens
+// 1. Press "/"
+// Expectation: Display still shows 200
+// Actual: works
+
+// 2. Press "5"
+// Expectation: Display shows 5
+// Actual: works
+
+// 3. Press "="
+// Expectation: Display shows 40
+// Actual: works
+
+// 4. Press "-"
+// Expectation: Display still shows 40
+// Actual: display shows 8
+
+
+
+// 5. Press "10"
+// Expectation: Display shows 10
+// Actual: works
+
+// 6. Press "="
+// Expectation: Display shows 30
+// Actual: display shows -2
 
 
 
@@ -35,33 +57,6 @@ keys.addEventListener('click', event => {
           display.textContent = secondOperand;
     }
 }
-// works:
-//     if (type === 'operator') { 
-//         if (firstOperand && secondOperand)  {
-//             switch (operator)   {
-//                 case '+':
-//                     result = Number(firstOperand) + Number(secondOperand);
-//                     display.textContent = result;
-//                     break;
-//                 case '-':
-//                     result = Number(firstOperand) - Number(secondOperand);
-//                     display.textContent = result;
-//                     break;
-//                 case '*':
-//                     result = Number(firstOperand) * Number(secondOperand);
-//                     display.textContent = result;    
-//                     break;
-//                 case '/':
-//                     result = Number(firstOperand) / Number(secondOperand);
-//                     display.textContent = result;
-//                     break;
-//             }
-//         firstOperand = result;
-//         secondOperand = null;
-//         }
-//         operator = keyValue;
-//     }
-// });   
 
 
 if (type === 'operator') { 
@@ -84,25 +79,17 @@ if (type === 'operator') {
                 display.textContent = result;
                 break;
         }
-    firstOperand = result;
-    secondOperand = null;
-    } else if (!operator && !firstOperand && !secondOperand)    {
-        alert('Enter a number before entering an operator.');
-        operator = null;
+        firstOperand = result;
+        secondOperand = null;
+        } 
+        else if (!firstOperand && !secondOperand)    {
+            alert('Enter a number before entering an operator.');
+            operator = null;
+        }
+        operator = keyValue;
     }
-    operator = keyValue;
-}
 });   
     
-
-// } else if (!operator && !firstOperand && !secondOperand)  {
-        //     alert('Enter a number before entering an operator');
-        //     operator = null;
-        //   }
-
-
-
-
 
 const equal = document.querySelector('.equal');
 equal.addEventListener('click', event => {
@@ -154,6 +141,19 @@ clear.addEventListener('click', event => {
 
 
 
+
+
+// come back to this:
+// TEST CASE
+// Get alert to appear if ever operator is clicked before anything else.
+
+// 0. Press "+"
+// Expectation: Alert appears
+// Actual: works
+
+// 1. Without refreshing or doing anything else, press "-"
+// Expectation: Alert appears again
+// Actual: nothing happens
 
 
 
