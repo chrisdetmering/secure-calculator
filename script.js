@@ -1,31 +1,10 @@
 // TEST CASE
-// 22 + 33 - 11 = 44
+// Get CLEAR button working
 
-// 0. Press 22
-// Expectation: Display shows 22
-// Actual: works
+// 0. Press "C"
+// Expectation: Display clears
+// Actual: nothing happens
 
-// 1. Press +
-// Expectation: Display still shows 22
-// Actual: works
-
-// 2. Press 33
-// Expectation: Display shows 33
-// Actual: works
-
-// 3. Press -
-// Expectation: Display shows 55
-// Actual: display shows -11
-
-
-
-// 4. Press 11
-// Expectation: Display shows 11
-// Actual: 
-
-// 5. Press =
-// Expectation: Display shows 44
-// Actual: 
 
 
 const calculator = document.querySelector('.calculator');
@@ -53,9 +32,7 @@ keys.addEventListener('click', event => {
     }
 }
 
-    if (type === 'operator') {
-        debugger
-        operator = keyValue; 
+    if (type === 'operator') { 
         if (firstOperand && secondOperand)  {
             switch (operator)   {
                 case '+':
@@ -78,6 +55,7 @@ keys.addEventListener('click', event => {
             firstOperand = result;
             secondOperand = null;
         }
+        operator = keyValue;
     }
 });   
     
