@@ -1,30 +1,30 @@
 // TEST CASE
-// 11 + 22 + 33 = 66
+// 22 + 33 - 11 = 44
 
-// 0. Press 11
-// Expectation: Display shows 11
-// Actual: works
-
-// 1. Press +
-// Expectation: Display still shows 11
-// Actual: works
-
-// 2. Press 22
+// 0. Press 22
 // Expectation: Display shows 22
 // Actual: works
 
-// 3. Press +
+// 1. Press +
+// Expectation: Display still shows 22
+// Actual: works
+
+// 2. Press 33
 // Expectation: Display shows 33
 // Actual: works
 
-// 4. Press 33
-// Expectation: Display shows 33
-// Actual: display shows 2233
+// 3. Press -
+// Expectation: Display shows 55
+// Actual: display shows -11
 
 
+
+// 4. Press 11
+// Expectation: Display shows 11
+// Actual: 
 
 // 5. Press =
-// Expectation: Display shows 66
+// Expectation: Display shows 44
 // Actual: 
 
 
@@ -54,6 +54,7 @@ keys.addEventListener('click', event => {
 }
 
     if (type === 'operator') {
+        debugger
         operator = keyValue; 
         if (firstOperand && secondOperand)  {
             switch (operator)   {
@@ -75,6 +76,7 @@ keys.addEventListener('click', event => {
                     break;
             }
             firstOperand = result;
+            secondOperand = null;
         }
     }
 });   
