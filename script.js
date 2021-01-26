@@ -1,137 +1,93 @@
-// TEST CASE
-// 200 / 5 = 40 - 10 = 30.
-
-// 0. Press "200"
-// Expectation: Display shows 200
-// Actual: works
-
-// 1. Press "/"
-// Expectation: Display still shows 200
-// Actual: works
-
-// 2. Press "5"
-// Expectation: Display shows 5
-// Actual: works
-
-// 3. Press "="
-// Expectation: Display shows 40
-// Actual: works
-
-// 4. Press "-"
-// Expectation: Display still shows 40
-// Actual: display shows 8
-
-
-
-// 5. Press "10"
-// Expectation: Display shows 10
-// Actual: works
-
-// 6. Press "="
-// Expectation: Display shows 30
-// Actual: display shows -2
-
-
-
 const calculator = document.querySelector('.calculator');
 const keys = document.querySelector('.calculator-keys');
 const display = document.querySelector('.calculator-display');
 const expressionDisplay = document.querySelector('.expression-display');
-let firstOperand = null;
+let firstOperand = '';
 let operator = null;
-let secondOperand = null;
-let result = null;
+let secondOperand = '';
 
 
-keys.addEventListener('click', event => {
-    const key = event.target;
-    const keyValue = key.textContent;
-    const { type } = key.dataset;
+document.querySelectorAll('.number').forEach(numberButton => { 
+    numberButton.addEventListener('click', event => { 
+        const number = event.target.textContent;
 
-    if (type === 'number') {
-        if (operator === null) {
-          !firstOperand ? (firstOperand = keyValue) : (firstOperand += keyValue);
-          display.textContent = firstOperand;
+        if (!operator) {
+            firstOperand += number; 
+            display.textContent = firstOperand;
         } else {
-          !secondOperand ? (secondOperand = keyValue) : (secondOperand += keyValue);
-          display.textContent = secondOperand;
-    }
-}
-
-
-if (type === 'operator') { 
-    if (firstOperand && secondOperand)  {
-        switch (operator)   {
-            case '+':
-                result = Number(firstOperand) + Number(secondOperand);
-                display.textContent = result;
-                break;
-            case '-':
-                result = Number(firstOperand) - Number(secondOperand);
-                display.textContent = result;
-                break;
-            case '*':
-                result = Number(firstOperand) * Number(secondOperand);
-                display.textContent = result;    
-                break;
-            case '/':
-                result = Number(firstOperand) / Number(secondOperand);
-                display.textContent = result;
-                break;
+            secondOperand += number; 
+            display.textContent = secondOperand;
         }
-        firstOperand = result;
-        secondOperand = null;
-        } 
-        else if (!firstOperand && !secondOperand)    {
+    });
+});
+
+document.querySelectorAll('.operator').forEach(operatorButton => { 
+    operatorButton.addEventListener('click', event => { 
+        if (!firstOperand)    {
             alert('Enter a number before entering an operator.');
-            operator = null;
+            return; 
         }
-        operator = keyValue;
-    }
-});   
+
+        const selectedOperator = event.target.textContent;
+
+        if (firstOperand && secondOperand)  {
+            const result = calculate(); 
+            firstOperand = result;
+            secondOperand = '';
+        } 
+       
+        operator = selectedOperator;
+    }); 
+}); 
+
+
+
+
     
 
-const equal = document.querySelector('.equal');
-equal.addEventListener('click', event => {
-    const key = event.target;
-    const { type } = key.dataset;
-
-    if (type === 'equal')   {
-        switch (operator) {
-            case '+':
-                result = Number(firstOperand) + Number(secondOperand);
-                display.textContent = result;
-                break;
-            case '-':
-                result = Number(firstOperand) - Number(secondOperand);
-                display.textContent = result;
-                break;
-            case '*':
-                result = Number(firstOperand) * Number(secondOperand);
-                display.textContent = result;    
-                break;
-            case '/':
-                result = Number(firstOperand) / Number(secondOperand);
-                display.textContent = result;
-                break;
-        }
-    }
+document.querySelector('.equal')
+.addEventListener('click', () => {
+    const result = calculate(); 
+        
     firstOperand = result;
+    operator = null; 
+    secondOperand = ''; 
 });
     
 
-const clear = document.querySelector('.clear');
-clear.addEventListener('click', event => {
-    const key = event.target;
-    const { type } = key.dataset;
-
-    if (type === 'clear')   {
-        display.textContent = '0';
+function calculate() { 
+    let result; 
+    switch (operator) {
+        case '+':
+            result = Number(firstOperand) + Number(secondOperand);
+            display.textContent = result;
+            break;
+        case '-':
+            result = Number(firstOperand) - Number(secondOperand);
+            display.textContent = result;
+            break;
+        case '*':
+            result = Number(firstOperand) * Number(secondOperand);
+            display.textContent = result;    
+            break;
+        case '/':
+            result = Number(firstOperand) / Number(secondOperand);
+            display.textContent = result;
+            break;
     }
-    firstOperand = null;
-    secondOperand = null;
+
+    return result; 
+}
+
+
+
+
+document.querySelector('.clear')
+.addEventListener('click', event => {
+    display.textContent = '0';
+    firstOperand = '';
+    secondOperand = '';
     operator = null;
-    result = null;
 });
 
     
