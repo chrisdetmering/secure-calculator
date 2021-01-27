@@ -32,7 +32,7 @@ document.querySelectorAll('.operator').forEach(operatorButton => {
 
         if (firstOperand && secondOperand)  {
             const result = calculate(); 
-            firstOperand = result;
+            firstOperand = `${result}`;
             secondOperand = '';
         } 
        
@@ -49,7 +49,7 @@ document.querySelector('.equal')
 .addEventListener('click', () => {
     const result = calculate(); 
         
-    firstOperand = result;
+    firstOperand = `${result}`;
     operator = null; 
     secondOperand = ''; 
 });
@@ -83,7 +83,7 @@ function calculate() {
 
 
 document.querySelector('.clear')
-.addEventListener('click', event => {
+.addEventListener('click', () => {
     display.textContent = '0';
     firstOperand = '';
     secondOperand = '';
