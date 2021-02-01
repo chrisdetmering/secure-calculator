@@ -1,137 +1,76 @@
-// TEST CASE
-// 200 / 5 = 40 - 10 = 30.
-
-// 0. Press "200"
-// Expectation: Display shows 200
-// Actual: works
-
-// 1. Press "/"
-// Expectation: Display still shows 200
-// Actual: works
-
-// 2. Press "5"
-// Expectation: Display shows 5
-// Actual: works
-
-// 3. Press "="
-// Expectation: Display shows 40
-// Actual: works
-
-// 4. Press "-"
-// Expectation: Display still shows 40
-// Actual: display shows 8
-
-
-
-// 5. Press "10"
-// Expectation: Display shows 10
-// Actual: works
-
-// 6. Press "="
-// Expectation: Display shows 30
-// Actual: display shows -2
-
-
-
 const calculator = document.querySelector('.calculator');
-const keys = document.querySelector('.calculator-keys');
 const display = document.querySelector('.calculator-display');
-const expressionDisplay = document.querySelector('.expression-display');
-let firstOperand = null;
+let firstOperand = '';
 let operator = null;
-let secondOperand = null;
-let result = null;
+let secondOperand = '';
+
+document.querySelectorAll(".number").forEach(numberButton => { 
+    numberButton.addEventListener('click', () => { 
+        if (!operator) { 
+            firstOperand += numberButton.textContent; 
+            display.textContent = firstOperand; 
+        } else { 
+            secondOperand += numberButton.textContent; 
+            display.textContent = secondOperand
+        }
+    })
+
+})
 
 
-keys.addEventListener('click', event => {
-    const key = event.target;
-    const keyValue = key.textContent;
-    const { type } = key.dataset;
+document.querySelectorAll(".operator").forEach(operatorButton => { 
+    operatorButton.addEventListener("click", () => { 
+        
+        if (firstOperand && operator && secondOperand) { 
+            const result = calculate(); 
+            display.textContent = result; 
+            firstOperand = result;
+            operator = operatorButton.textContent; 
+            secondOperand = ''; 
+        }
 
-    if (type === 'number') {
-        if (operator === null) {
-          !firstOperand ? (firstOperand = keyValue) : (firstOperand += keyValue);
-          display.textContent = firstOperand;
-        } else {
-          !secondOperand ? (secondOperand = keyValue) : (secondOperand += keyValue);
-          display.textContent = secondOperand;
+        if (firstOperand) { 
+            operator = operatorButton.textContent;
+        }
+        
+    })
+})
+
+ 
+document.querySelector('.equal')
+.addEventListener('click', () => {
+    const result = calculate(); 
+    display.textContent = result; 
+    firstOperand = result;
+    operator = null; 
+    secondOperand = ''; 
+});
+    
+
+function calculate() { 
+    switch (operator) {
+        case '+':
+            return `${Number(firstOperand) + Number(secondOperand)}`;
+        case '-':
+            return `${Number(firstOperand) - Number(secondOperand)}`;
+        case '*':
+            return `${Number(firstOperand) * Number(secondOperand)}`;   
+        case '/':
+            return `${Number(firstOperand) / Number(secondOperand)}`;
     }
+
 }
 
 
-if (type === 'operator') { 
-    if (firstOperand && secondOperand)  {
-        switch (operator)   {
-            case '+':
-                result = Number(firstOperand) + Number(secondOperand);
-                display.textContent = result;
-                break;
-            case '-':
-                result = Number(firstOperand) - Number(secondOperand);
-                display.textContent = result;
-                break;
-            case '*':
-                result = Number(firstOperand) * Number(secondOperand);
-                display.textContent = result;    
-                break;
-            case '/':
-                result = Number(firstOperand) / Number(secondOperand);
-                display.textContent = result;
-                break;
-        }
-        firstOperand = result;
-        secondOperand = null;
-        } 
-        else if (!firstOperand && !secondOperand)    {
-            alert('Enter a number before entering an operator.');
-            operator = null;
-        }
-        operator = keyValue;
-    }
-});   
-    
 
-const equal = document.querySelector('.equal');
-equal.addEventListener('click', event => {
-    const key = event.target;
-    const { type } = key.dataset;
 
-    if (type === 'equal')   {
-        switch (operator) {
-            case '+':
-                result = Number(firstOperand) + Number(secondOperand);
-                display.textContent = result;
-                break;
-            case '-':
-                result = Number(firstOperand) - Number(secondOperand);
-                display.textContent = result;
-                break;
-            case '*':
-                result = Number(firstOperand) * Number(secondOperand);
-                display.textContent = result;    
-                break;
-            case '/':
-                result = Number(firstOperand) / Number(secondOperand);
-                display.textContent = result;
-                break;
-        }
-    }
-    firstOperand = result;
-});
-    
 
-const clear = document.querySelector('.clear');
-clear.addEventListener('click', event => {
-    const key = event.target;
-    const { type } = key.dataset;
-
-    if (type === 'clear')   {
-        display.textContent = '0';
-    }
-    firstOperand = null;
-    secondOperand = null;
+document.querySelector('.clear')
+.addEventListener('click', () => {
+    display.textContent = '0';
+    firstOperand = '';
+    secondOperand = '';
     operator = null;
-    result = null;
 });
 
     
@@ -143,17 +82,6 @@ clear.addEventListener('click', event => {
 
 
 
-// come back to this:
-// TEST CASE
-// Get alert to appear if ever operator is clicked before anything else.
-
-// 0. Press "+"
-// Expectation: Alert appears
-// Actual: works
-
-// 1. Without refreshing or doing anything else, press "-"
-// Expectation: Alert appears again
-// Actual: nothing happens
 
 
 
@@ -165,17 +93,5 @@ clear.addEventListener('click', event => {
 
 
 
-// PLAN:
 
-// 0. Refactor to perform continuous functions.
-// DONE!
 
-// 1. How can you refactor "displays" section of CSS?
-
-// 2. Get "&times;" working with the eval function somehow...
-
-// 3. Add commas after zeros.
-
-// 4. Include spaces before & after operators. 
-
-// 5. Ensure the correct screenshot displays.
